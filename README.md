@@ -38,7 +38,7 @@ The app loads call detail records from a mock API and presents them with clean c
 
 Live deployment link:
 
-https://your-app-url.example.com
+https://call-analytics-dashboard-one.vercel.app
 
 > Update the URL above with your actual deployment link.
 

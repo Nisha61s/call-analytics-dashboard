@@ -1,6 +1,7 @@
 export function getAnalytics(calls) {
+  const safeCalls = Array.isArray(calls) ? calls : [];
 
-  if (!calls.length) {
+  if (!safeCalls.length) {
     return {
       totalCalls: 0,
       totalCost: 0,
@@ -12,33 +13,29 @@ export function getAnalytics(calls) {
     };
   }
 
-  const totalCalls = calls.length;
+  const totalCalls = safeCalls.length;
 
-  const totalCost = calls.reduce(
-    (sum, call) => sum + Number(call.callCost),
+  const totalCost = safeCalls.reduce(
+    (sum, call) => sum + Number(call.callCost ?? 0),
     0
   );
 
-  const totalDuration = calls.reduce(
-    (sum, call) => sum + call.callDuration,
+  const totalDuration = safeCalls.reduce(
+    (sum, call) => sum + Number(call.callDuration ?? 0),
     0
   );
 
   const averageDuration = totalDuration / totalCalls;
 
-  const successfulCalls = calls.filter(
-    call => call.callStatus
+  const successfulCalls = safeCalls.filter(
+    (call) => call.callStatus !== false
   ).length;
 
   const failedCalls = totalCalls - successfulCalls;
 
-  const longestCall = Math.max(
-    ...calls.map(call => call.callDuration)
-  );
-
-  const shortestCall = Math.min(
-    ...calls.map(call => call.callDuration)
-  );
+  const durations = safeCalls.map((call) => Number(call.callDuration ?? 0));
+  const longestCall = durations.length ? Math.max(...durations) : 0;
+  const shortestCall = durations.length ? Math.min(...durations) : 0;
 
   return {
     totalCalls,

@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-//import { fetchCalls } from "../api/cdrApi";
 import { fetchCalls, fetchAnalytics } from "../api/cdrApi";
 import KPICards from "../components/ui/KPICards";
-//import { getAnalytics } from "../utils/analytics";
 import DurationChart from "../components/ui/DurationChart";
 import CostChart from "../components/ui/CostChart";
 import ActivityTimeline from "../components/ui/ActivityTimeline";
@@ -11,39 +9,26 @@ import RecentCallsTable from "../components/ui/RecentCallsTable";
 import { Skeleton } from "../components/ui/skeleton";
 
 export default function Dashboard() {
-  //const [calls, setCalls] = useState([]);
   const [calls, setCalls] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [totalRecords, setTotalRecords] = useState(0);
   const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     async function loadData() {
-       try {
-            const [callData, analyticsData] = await Promise.all([
-    fetchCalls(currentPage, 8),
-    fetchAnalytics(),
-]);
-
-setCalls(callData.calls);
-setTotalPages(callData.totalPages);
-setTotalRecords(callData.totalRecords);
-setAnalytics(analyticsData);
-
-        } catch (error) {
-            console.error(error);
-            setError("Failed to fetch call data");
-        } finally {
-            setLoading(false);
-        }
+      try {
+        const data = await fetchCalls();
+        setCalls(data);
+      } catch (error) {
+        setError("Failed to fetch call data");
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     }
 
-
     loadData();
-  }, [currentPage]);
+  }, []);
 
   if (loading) {
     return (
@@ -71,7 +56,7 @@ setAnalytics(analyticsData);
     );
   }
 
-  // const analytics = getAnalytics(calls);
+  //const analytics = getAnalytics(calls);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-950 py-10">
@@ -103,13 +88,7 @@ setAnalytics(analyticsData);
           <CityChart calls={calls} />
         </div>
 
-        <RecentCallsTable
-    calls={calls}
-    currentPage={currentPage}
-    totalPages={totalPages}
-    totalRecords={totalRecords}
-    setCurrentPage={setCurrentPage}
-/>
+        <RecentCallsTable calls={calls} />
       </div>
     </div>
   );

@@ -32,9 +32,9 @@ export default function CityChart({ calls }) {
 
   return (
 
-    <div className="bg-white rounded-xl shadow p-6 h-full">
+    <div className="bg-slate-800/50 rounded-xl shadow p-6 h-full border-l-4 border-l-cyan-500">
 
-      <h2 className="text-2xl font-bold mb-6">
+      <h2 className="text-2xl font-bold mb-6 text-white">
 
         Calls by City
 
@@ -44,15 +44,15 @@ export default function CityChart({ calls }) {
 
         <BarChart data={data} layout="vertical" margin={{ top: 20, right: 20, left: 0, bottom: 20 }}>
 
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
 
-          <XAxis type="number" />
+          <XAxis type="number" stroke="#cbd5e1" />
 
-          <YAxis type="category" dataKey="city" width={120} />
+          <YAxis type="category" dataKey="city" width={120} stroke="#cbd5e1" />
 
           <Tooltip />
 
-          <Bar dataKey="count" fill="#3b82f6" radius={[8, 8, 8, 8]} />
+          <Bar dataKey="count" fill="#00d4ff" radius={[8, 8, 8, 8]} />
 
         </BarChart>
 

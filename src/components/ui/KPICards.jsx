@@ -9,35 +9,46 @@ import {
 } from "lucide-react";
 
 export default function KPICards({ analytics }) {
+  const safeAnalytics = analytics ?? {};
 
   const cards = [
     {
       title: "Total Calls",
-      value: analytics.totalCalls,
+      value: safeAnalytics.totalCalls ?? 0,
       icon: Phone,
+      color: "bg-cyan-500/20",
+      iconColor: "text-cyan-400",
     },
     {
       title: "Total Cost",
-      value: `$${analytics.totalCost.toLocaleString(undefined, {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-})}`,
+      value: `$${Number(safeAnalytics.totalCost ?? 0).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })}`,
       icon: DollarSign,
+      color: "bg-cyan-500/20",
+      iconColor: "text-cyan-400",
     },
     {
       title: "Average Duration",
-      value: `${analytics.averageDuration.toFixed(1)} sec`,
+      value: `${Number(safeAnalytics.averageDuration ?? 0).toFixed(1)} sec`,
       icon: Clock,
+      color: "bg-cyan-500/20",
+      iconColor: "text-cyan-400",
     },
     {
       title: "Successful Calls",
-      value: analytics.successfulCalls,
+      value: safeAnalytics.successfulCalls ?? 0,
       icon: CheckCircle,
+      color: "bg-emerald-500/20",
+      iconColor: "text-emerald-400",
     },
     {
       title: "Failed Calls",
-      value: analytics.failedCalls,
+      value: safeAnalytics.failedCalls ?? 0,
       icon: XCircle,
+      color: "bg-red-500/20",
+      iconColor: "text-red-400",
     },
   ];
 
@@ -50,23 +61,26 @@ export default function KPICards({ analytics }) {
 
         return (
 
-          <Card key={card.title} className="transition-transform duration-200 hover:scale-105">
+          <Card key={card.title} className="transition-all duration-200 hover:scale-105 hover:shadow-lg border-cyan-500/30 bg-slate-800/50">
 
             <CardContent className="p-6">
 
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-start">
 
-                <h3 className="text-gray-500 text-sm">
-                  {card.title}
-                </h3>
+                <div className="flex-1">
+                  <h3 className="text-cyan-400 text-sm font-medium">
+                    {card.title}
+                  </h3>
+                  <p className="text-3xl font-bold mt-4 text-white">
+                    {card.value}
+                  </p>
+                </div>
 
-                <Icon size={22} />
+                <div className={`${card.color} p-3 rounded-lg`}>
+                  <Icon size={22} className={card.iconColor} />
+                </div>
 
               </div>
-
-              <p className="text-3xl font-bold mt-4">
-                {card.value}
-              </p>
 
             </CardContent>
 

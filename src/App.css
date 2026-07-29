@@ -1,3 +1,86 @@
+/* Dark Cyan/Purple Theme Styling */
+
+:root {
+  --primary-cyan: #00d4ff;
+  --secondary-cyan: #0099cc;
+  --accent-green: #00ff88;
+  --dark-bg: #1a1f3a;
+}
+
+body {
+  background: linear-gradient(135deg, #0f1425 0%, #1a1f3a 50%, #0d1b2a 100%);
+  font-family: 'Geist Variable', sans-serif;
+}
+
+/* Card Enhancements */
+[role="document"] {
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.15);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  background: linear-gradient(135deg, rgba(36, 41, 70, 0.95) 0%, rgba(26, 31, 58, 0.95) 100%);
+}
+
+/* Button Enhancements */
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+/* Table Enhancements */
+table {
+  border-collapse: collapse;
+}
+
+table thead {
+  background: linear-gradient(90deg, #eff6ff 0%, #dbeafe 100%);
+  border-bottom: 2px solid #3b82f6;
+}
+
+table tbody tr {
+  border-bottom: 1px solid #dbeafe;
+  background-color: white;
+}
+
+table tbody tr:hover {
+  background-color: #f0f9ff;
+  transition: background-color 0.2s ease;
+}
+
+/* Card Shadow and Border */
+.card {
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, rgba(36, 41, 70, 0.95) 0%, rgba(26, 31, 58, 0.95) 100%);
+}
+
+.card:hover {
+  box-shadow: 0 12px 30px rgba(0, 212, 255, 0.2);
+  border-color: rgba(0, 212, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Scroll Bar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e0e7ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1e40af;
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;

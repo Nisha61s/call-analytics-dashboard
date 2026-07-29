@@ -40,17 +40,17 @@ export default function CostChart({ calls }) {
 
   return (
 
-    <div className="bg-white rounded-xl shadow p-6 h-full">
+    <div className="bg-slate-800/50 rounded-xl shadow p-6 h-full border-l-4 border-l-cyan-500">
 
-      <h2 className="text-xl font-semibold mb-4 border-b pb-2">
+      <h2 className="text-2xl font-bold mb-4 text-white">
   Call Cost Analytics
 </h2>
 
-      <p className="text-gray-500 mt-2 mb-6">
+      <p className="text-cyan-400 mt-2 mb-6 font-medium">
 
         Average Cost per Call:
 
-        <strong>
+        <strong className="text-cyan-300">
 
           ${averageCost.toFixed(2)}
 
@@ -65,17 +65,17 @@ export default function CostChart({ calls }) {
 
         <BarChart data={data}>
 
-          <CartesianGrid strokeDasharray="3 3"/>
+          <CartesianGrid strokeDasharray="3 3" stroke="#334155"/>
 
-          <XAxis dataKey="city"/>
+          <XAxis dataKey="city" stroke="#cbd5e1" />
 
-          <YAxis/>
+          <YAxis stroke="#cbd5e1" />
 
           <Tooltip/>
 
           <Bar
             dataKey="cost"
-            fill="#22c55e"
+            fill="#00d4ff"
             radius={[8,8,0,0]}
           />
 

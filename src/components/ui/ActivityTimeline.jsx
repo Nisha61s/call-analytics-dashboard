@@ -40,9 +40,9 @@ export default function ActivityTimeline({ calls }) {
 
   return (
 
-    <div className="bg-white rounded-xl shadow p-6 h-full">
+    <div className="bg-slate-800/50 rounded-xl shadow p-6 h-full border-l-4 border-l-cyan-500">
 
-      <h2 className="text-2xl font-bold mb-6">
+      <h2 className="text-2xl font-bold mb-6 text-white">
 
         Call Activity Timeline
 
@@ -55,18 +55,18 @@ export default function ActivityTimeline({ calls }) {
 
         <LineChart data={data}>
 
-          <CartesianGrid strokeDasharray="3 3"/>
+          <CartesianGrid strokeDasharray="3 3" stroke="#334155"/>
 
-          <XAxis dataKey="hour"/>
+          <XAxis dataKey="hour" stroke="#cbd5e1" />
 
-          <YAxis/>
+          <YAxis stroke="#cbd5e1" />
 
           <Tooltip/>
 
           <Line
             type="monotone"
             dataKey="calls"
-            stroke="#8b5cf6"
+            stroke="#00d4ff"
             strokeWidth={3}
           />
 

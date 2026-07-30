@@ -227,6 +227,10 @@ Response:
 
 ## Installation
 
+## Github link
+
+https://github.com/Nisha61s/call-analytics-dashboard
+
 ### Clone Repository
 
 ```bash
@@ -238,7 +242,7 @@ git clone https://github.com/yourusername/telecom-intelligence-platform.git
 ### Backend Setup
 
 ```bash
-cd backend
+cd admin
 npm install
 ```
 
@@ -246,10 +250,11 @@ Create `.env`
 
 ```env
 PORT=5000
-
-MONGO_URI=your_mongodb_connection_string
-
+NODE_ENV=development
+MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
+CORS_ORIGIN=http://localhost:5173
+CORS_ORIGINS=http://localhost:5173
 ```
 
 Start backend:
@@ -267,6 +272,67 @@ cd frontend
 npm install
 npm run dev
 ```
+
+---
+
+## Secure Render Deployment (Admin Backend)
+
+The admin backend is configured for Render using `render.yaml` at the project root.
+
+### 1) Create Render Service
+
+- Connect this GitHub repository in Render.
+- Create a new Web Service from blueprint (`render.yaml`).
+- Confirm service root directory is `admin`.
+
+### 2) Configure Secrets (Point 2)
+
+Set these in Render Environment Variables (never commit them):
+
+- `MONGODB_URI`
+- `JWT_SECRET`
+- `CORS_ORIGIN`
+- `CORS_ORIGINS`
+
+Set this in GitHub Actions secrets:
+
+- `RENDER_DEPLOY_HOOK_URL` (from Render deploy hook)
+
+### 3) Environment File Safety (Point 3)
+
+- `admin/.env` is ignored by Git.
+- Use `admin/.env.example` as the template for local development.
+- If any key was exposed before, rotate it in MongoDB/JWT providers.
+
+### 4) Runtime Security (Point 4)
+
+The backend now includes:
+
+- CORS allowlist via `CORS_ORIGIN`/`CORS_ORIGINS`
+- JWT secret enforcement (no insecure fallback secret)
+- Auth protection on analytics routes
+- Helmet security headers
+- Auth rate limiting to reduce brute-force attempts
+
+Render provides HTTPS termination for all deployed endpoints.
+
+### 5) GitHub Security Governance (Point 5)
+
+Repository automation added:
+
+- Dependabot updates for `/` and `/admin`
+- Dependency Review on pull requests
+- CodeQL analysis on pushes and pull requests
+
+Enable branch protection in GitHub settings for `main`:
+
+- Require pull request before merge
+- Require status checks to pass
+- Block force pushes and deletions
+
+### 6) Deployment Through GitHub Actions (Point 6)
+
+Workflow `deploy-admin-render.yml` triggers Render deploys on `main` updates to backend files and uses only the deploy hook secret, avoiding long-lived cloud credentials.
 
 ---
 

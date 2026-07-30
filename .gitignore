@@ -24,3 +24,11 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+admin/.env
+admin/.env.*
+admin/node_modules

@@ -268,10 +268,21 @@ npm run dev
 ### Frontend Setup
 
 ```bash
-cd frontend
 npm install
 npm run dev
 ```
+
+---
+
+## Vercel Frontend Deployment
+
+Set this environment variable in Vercel Project Settings:
+
+- `VITE_API_BASE_URL=https://<your-render-service>.onrender.com/api`
+
+This project also includes `vercel.json` with SPA rewrites so direct route loads like `/login` resolve to the app instead of returning 404.
+
+After setting env vars, redeploy in Vercel.
 
 ---
 

@@ -1,7 +1,14 @@
 import axios from "axios";
 
+const configuredBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
+// Local fallback keeps development workflow unchanged when env is not set.
+const fallbackBaseUrl = "http://localhost:5000/api";
+
+const baseURL = configuredBaseUrl || fallbackBaseUrl;
+
 const api = axios.create({
-    baseURL: "http://localhost:5000/api",
+    baseURL,
     headers: {
         "Content-Type": "application/json",
     },

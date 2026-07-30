@@ -96,7 +96,7 @@ const handleNextPage = () => {
 
         <TableBody>
 
-          {calls.map((call) => (
+          {filteredCalls.map((call) => (
 
             <TableRow key={call.id}
             className="odd:bg-slate-700/30 hover:bg-slate-700/50 transition-colors text-white">
@@ -160,7 +160,7 @@ const handleNextPage = () => {
           <span>Showing {startIndex + 1} to {Math.min(endIndex, totalRecords)} of {totalRecords} calls</span>
           {searchQuery && (
             <span className="ml-2 text-cyan-300">
-              (filtered from {calls.length} total)
+              (filtered from {filteredCalls.length} results)
             </span>
           )}
         </div>

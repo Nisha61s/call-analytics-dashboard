@@ -8,7 +8,7 @@ import {
   CartesianGrid,
 } from "recharts";
 
-export default function ActivityTimeline({ calls }) {
+export default function ActivityTimeline({ calls, sortBy, order }) {
 
   const callsPerHour = {};
 
@@ -34,9 +34,15 @@ export default function ActivityTimeline({ calls }) {
     })
   );
 
-  data.sort(
-    (a, b) => Number(a.hour) - Number(b.hour)
-  );
+  data.sort((a, b) => {
+    const comparison = Number(a.hour) - Number(b.hour);
+
+    if (sortBy === "timestamp") {
+      return order === "asc" ? comparison : -comparison;
+    }
+
+    return comparison;
+  });
 
   return (
 

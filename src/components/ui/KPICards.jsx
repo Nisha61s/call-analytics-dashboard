@@ -65,18 +65,18 @@ export default function KPICards({ analytics }) {
 
             <CardContent className="p-6">
 
-              <div className="flex justify-between items-start">
+              <div className="flex items-start justify-between gap-3">
 
-                <div className="flex-1">
+                <div className="min-w-0 flex-1">
                   <h3 className="text-cyan-400 text-sm font-medium">
                     {card.title}
                   </h3>
-                  <p className="text-3xl font-bold mt-4 text-white">
+                  <p className="mt-4 break-words text-2xl font-bold text-white">
                     {card.value}
                   </p>
                 </div>
 
-                <div className={`${card.color} p-3 rounded-lg`}>
+                <div className={`${card.color} shrink-0 rounded-lg p-3`}>
                   <Icon size={22} className={card.iconColor} />
                 </div>
 

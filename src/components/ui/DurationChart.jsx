@@ -8,22 +8,30 @@ import {
   CartesianGrid,
 } from "recharts";
 
-export default function DurationChart({ analytics }) {
+export default function DurationChart({ analytics, sortBy, order }) {
+  const safeAnalytics = analytics ?? {};
 
   const data = [
     {
       name: "Longest",
-      duration: analytics.longestCall,
+      duration: Number(safeAnalytics.longestCall ?? 0),
     },
     {
       name: "Average",
-      duration: analytics.averageDuration,
+      duration: Number(safeAnalytics.averageDuration ?? 0),
     },
     {
       name: "Shortest",
-      duration: analytics.shortestCall,
+      duration: Number(safeAnalytics.shortestCall ?? 0),
     },
   ];
+
+  if (sortBy === "duration") {
+    data.sort((a, b) => {
+      const comparison = a.duration - b.duration;
+      return order === "asc" ? comparison : -comparison;
+    });
+  }
 
   return (
     <div className="bg-slate-800/50 rounded-xl shadow p-6 h-full border-l-4 border-l-cyan-500">

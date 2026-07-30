@@ -8,7 +8,7 @@ import {
   CartesianGrid,
 } from "recharts";
 
-export default function CostChart({ calls }) {
+export default function CostChart({ calls, sortBy, order }) {
 
   const cityTotals = {};
 
@@ -28,6 +28,16 @@ export default function CostChart({ calls }) {
       cost,
     })
   );
+
+  data.sort((a, b) => {
+    if (sortBy === "city") {
+      const comparison = a.city.localeCompare(b.city);
+      return order === "asc" ? comparison : -comparison;
+    }
+
+    const comparison = a.cost - b.cost;
+    return order === "asc" ? comparison : -comparison;
+  });
 
   const averageCost =
     calls.length === 0

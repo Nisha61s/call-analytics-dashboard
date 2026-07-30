@@ -6,10 +6,9 @@ import {
   YAxis,
   Tooltip,
   CartesianGrid,
-  Legend,
 } from "recharts";
 
-export default function CityChart({ calls }) {
+export default function CityChart({ calls, sortBy, order }) {
 
   const cityCounts = {};
 
@@ -29,6 +28,16 @@ export default function CityChart({ calls }) {
       count,
     })
   );
+
+  data.sort((a, b) => {
+    if (sortBy === "city") {
+      const comparison = a.city.localeCompare(b.city);
+      return order === "asc" ? comparison : -comparison;
+    }
+
+    const comparison = a.count - b.count;
+    return order === "asc" ? comparison : -comparison;
+  });
 
   return (
 

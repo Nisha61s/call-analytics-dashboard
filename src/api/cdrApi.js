@@ -22,12 +22,22 @@ const normalizeCall = (call) => {
 };
 
 
-export const fetchCalls = async (page = 1, limit = 8) => {
+export const fetchCalls = async (
+    page = 1,
+    limit = 8,
+    filters = {},
+    sort = {}
+) => {
+    const sortBy = sort.sortBy || sort.sort_by || "timestamp";
+    const order = sort.order || sort.order_by || "desc";
 
     const response = await api.get("/cdr", {
         params: {
             page,
             limit,
+            ...filters,
+            sortBy,
+            order,
         },
     });
 
